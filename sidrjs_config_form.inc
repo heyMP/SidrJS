@@ -14,15 +14,15 @@ function sidrjs_config_form($form, &$form_state) {
 	);
 	
 	
-	$form['sidrs_theme'] = array(
+	$form['sidrjs_theme'] = array(
 	    '#type' => 'radios',
 	    '#title' => t('Theme'),
-	    '#default_value' => variable_get('sidrjs_theme'),
+	    '#default_value' => variable_get('sidrjs_theme', 'dark'),
 	    '#options' => array(
 			  'dark' => t('Dark'),
-			  'light' => t('Light'), 
+			  'light' => t('Light') 
 			  ),
-	    '#description' => t('Select which style theme to use. NOT FUNCTIONAL YET'),
+	    '#description' => t('Select which style theme to use.'),
     );
    
 	

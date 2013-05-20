@@ -1,12 +1,23 @@
 <?php
 
 $sidrjs = 'sidrjs';
+$sidrjs_theme = variable_get('sidrjs_theme');
+
 
 // add the Sidrjs library to the Libraries API
 if ($path = libraries_get_path($sidrjs)) {
   // Add the Sidr library
   drupal_add_js($path . '/jquery.sidr.min.js');
-  drupal_add_css($path . '/stylesheets/jquery.sidr.dark.css');
+  
+  //Check the theme variable on the settings page
+  //to decide which theme the user wants
+  if ($sidrjs_theme == 'dark') {
+  	drupal_add_css($path . '/stylesheets/jquery.sidr.dark.css');
+  }
+  if ($sidrjs_theme == 'light') {
+  	drupal_add_css($path . '/stylesheets/jquery.sidr.light.css');
+  }	
+  
 } else {
 	drupal_set_message(t('You need to install the Sidr JS library in the Libraries folder, "libraries/sidrjs"'), 'error');	
 }
@@ -42,3 +53,5 @@ function sidrjs_menu() {
 $sidrjs_target = variable_get('sidrjs_target');
 
 drupal_add_js(array('sidrjs' => array('sidrjs_target' => $sidrjs_target)), 'setting');
+
+
