@@ -5,6 +5,9 @@
       //Set variables from the module
       var target = Drupal.settings.sidrjs.sidrjs_target;
       
+      //Add the Responsive menu
+      $(target).after('<div id="mobile-header"><a id="responsive-menu-button" href="#sidr-main">Menu</a></div>');
+      
       //Invoke Sidr
        $('#responsive-menu-button').sidr({
 			name: 'sidr-main',
