@@ -1,0 +1,44 @@
+<?php
+
+$sidrjs = 'sidrjs';
+
+// add the Sidrjs library to the Libraries API
+if ($path = libraries_get_path($sidrjs)) {
+  // Add the Sidr library
+  drupal_add_js($path . '/jquery.sidr.min.js');
+  drupal_add_css($path . '/stylesheets/jquery.sidr.dark.css');
+} else {
+	drupal_set_message(t('You need to install the Sidr JS library in the Libraries folder, "libraries/sidrjs"'), 'error');	
+}
+
+
+/*
+ * Impliments hook_menu
+ *
+ * Admin Page 
+*/
+
+function sidrjs_menu() {
+	$items['admin/config/system/sidrjs'] = array(
+		'title' => 'Sidrjs Configuration',
+		'description' => t('Configure the Sidr.js plugin for mobile navigation.'),
+		'page callback' => 'drupal_get_form',
+		'page arguments' => array('sidrjs_config_form'),
+		'access arguments' => array('administer site configuration'),
+		'file' => 'sidrjs_config_form.inc',
+	);
+	
+	return $items;
+}
+
+
+
+/*
+ * Impliments drupal_add_js
+ *
+ * Send variables to the sidr.js file
+*/
+
+$sidrjs_target = variable_get('sidrjs_target');
+
+drupal_add_js(array('sidrjs' => array('sidrjs_target' => $sidrjs_target)), 'setting');
