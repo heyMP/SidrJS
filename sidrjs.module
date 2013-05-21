@@ -43,6 +43,33 @@ function sidrjs_menu() {
 }
 
 
+/*
+ * Impliments hook_init
+ * List the Menus that are selected on the admin page 
+*/
+
+function sidrjs_init() {
+	
+	//retreve the selected menus from the settings config page
+	$selected_menus = variable_get('sidrjs_menus');
+	//Wrap the 
+	$sidrjs_selected_menu_output = '<div>';
+	
+	foreach($selected_menus as $selected_menu) {
+		if (!$selected_menu == 0) {
+			$tree = menu_tree_page_data($selected_menu);
+			$tree_output = menu_tree_output($tree, 1);
+			$menu = array(
+				'#markup' => drupal_render($tree_output),
+			);
+			
+			$sidrjs_selected_menu_output .= drupal_render($menu);		
+		}		
+	}
+	$sidrjs_selected_menu_output .= '</div>';
+	drupal_add_js(array('sidrjs' => array('sidrjs_selected_menu_output' => $sidrjs_selected_menu_output)), 'setting');
+}
+
 
 /*
  * Impliments drupal_add_js
@@ -51,6 +78,5 @@ function sidrjs_menu() {
 */
 
 $sidrjs_target = variable_get('sidrjs_target');
-
 drupal_add_js(array('sidrjs' => array('sidrjs_target' => $sidrjs_target)), 'setting');
 

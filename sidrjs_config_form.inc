@@ -13,6 +13,14 @@ function sidrjs_config_form($form, &$form_state) {
 		'#description' => t('Include the ID of the div the contains the navigation you want to render in the Sidr.js mobile navigation.'),
 	);
 	
+	$form['sidrjs_menus'] = array(
+		'#type' => 'checkboxes',
+		'#title' => t('Menus'),
+		'#default_value' => variable_get('sidrjs_menus'),
+		'#options' => menu_list_system_menus(),
+		'#description' => t('Select the menus you want to display in the Sidr mobile navigation.')
+	);
+	
 	
 	$form['sidrjs_theme'] = array(
 	    '#type' => 'radios',
