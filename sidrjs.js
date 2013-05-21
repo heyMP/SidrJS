@@ -7,7 +7,7 @@
       var menu_output = Drupal.settings.sidrjs.sidrjs_selected_menu_output;
       
       //Add the Responsive menu
-      $(target).after('<div id="mobile-header"><a id="responsive-menu-button" href="#sidr-main">Menu</a></div>');
+      $('body').prepend('<div id="mobile-header"><a id="responsive-menu-button" href="#sidr-main">Menu</a></div>');
       
       //Invoke Sidr
        $('#responsive-menu-button').sidr({
